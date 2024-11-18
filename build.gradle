@@ -7,6 +7,7 @@ plugins {
 
 ext {
 	springCloudVersion = "2023.0.3"
+	springDocVersion = "2.6.0"
 }
 
 group = 'com.example'
@@ -26,6 +27,10 @@ dependencies {
 	implementation 'org.openapitools:jackson-databind-nullable:0.2.4'
 	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
 
+	// Springdoc
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-api:$springDocVersion"
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocVersion"
+
 	compileOnly 'org.projectlombok:lombok'
 
 	annotationProcessor 'org.projectlombok:lombok'
@@ -44,7 +49,7 @@ dependencyManagement {
 
 openApiGenerate {
 	generatorName = 'spring'
-	inputSpec = "$rootDir/apis/currency-convert-api.yaml"
+	inputSpec = "$rootDir/src/main/resources/public/currency-convert-api.yaml"
 	outputDir = "$rootDir/build/generated"
 	apiPackage = 'com.example.currencyconvert.api'
 	modelPackage = 'com.example.currencyconvert.model'
@@ -57,11 +62,15 @@ openApiGenerate {
 	]
 }
 
-sourceSets {
-	main {
-		java {
-			srcDir "$rootDir/build/generated/src/main/java"
+java {
+	sourceSets {
+		main {
+			java.srcDirs += "src/generated/java"
+			resources.srcDirs += "src/generated/resources"
 		}
+	}
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(application_java_version)
 	}
 }
 
@@ -72,4 +81,12 @@ bootJar {
 compileJava {
 	dependsOn tasks.openApiGenerate
 	source tasks.openApiGenerate.outputs
+}
+
+processResources {
+	from 'publicFolder'
+}
+
+tasks.register('publicFolder', Copy) {
+	from 'public' into 'public'
 }

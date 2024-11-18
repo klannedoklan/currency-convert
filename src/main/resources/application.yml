@@ -23,3 +23,13 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+springdoc:
+  paths-to-match: /admin/manage/*
+  show-actuator: false
+  swagger-ui:
+    path: /swagger-ui/index.html
+    urls:
+      - url: currency-convert-api.yaml
+        name: currency-convert-api
+    urls-primary-name: currency-convert-api

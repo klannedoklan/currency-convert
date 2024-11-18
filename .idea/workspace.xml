@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a40e108-093c-485c-801e-e744af55bc31" name="Changes" comment="" />
+    <list default="true" id="7a40e108-093c-485c-801e-e744af55bc31" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/SwaggerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/public/currency-convert-api.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apis/currency-convert-api.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,19 +39,7 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="currency-convert" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="currency-convert" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="other" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="currency-convert" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="verification" type="c8890929:TasksNode$1" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -63,24 +59,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "contexts": [
+  <component name="KubernetesApiProvider">{
+  &quot;contexts&quot;: [
     {
-      "name": "eks_eks-eu-west-1-dev",
-      "originalNamespace": "aws-dw-ie-dev"
+      &quot;name&quot;: &quot;eks_eks-eu-west-1-dev&quot;,
+      &quot;originalNamespace&quot;: &quot;aws-dw-ie-dev&quot;
     }
   ],
-  "isMigrated": true
-}]]></component>
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="KubernetesSettings">
     <option name="contextName" value="eks_eks-eu-west-1-dev" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2ow34yPnMSiMDxFMFPOSGBurfDP" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -110,19 +106,20 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.CurrencyConvertApplication.executor": "Debug",
+    "Spring Boot.CurrencyConvertApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/ognyan.ignatov/dev/currency-convert/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Problems",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.43218806",
     "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "MavenSettings",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -130,13 +127,22 @@
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.example.currencyconvert.service.impl" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/build/generated/src/main/resources" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.currencyconvert.web.rest.controller" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="gradle bootRun" />
       <command value="gradle bootBuildImage" />
-      <command value="gradle gradle processResources" />
       <command value="gradle gradle deleteGeneratedSources" />
+      <command value="gradle gradle processResources" />
+      <command value="gradle processResources" />
       <command value="gradle clean build" />
     </option>
   </component>
@@ -196,17 +202,18 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="currency-convert [processResources]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="currency-convert [gradle processResources]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
+            <option value="gradle" />
             <option value="processResources" />
           </list>
         </option>
@@ -218,18 +225,18 @@
       <RunAsTest>false</RunAsTest>
       <method v="2" />
     </configuration>
-    <configuration name="currency-convert [processTestResources]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="currency-convert [processResources]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="processTestResources" />
+            <option value="processResources" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -254,19 +261,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Gradle.currency-convert [gradle processResources]" />
       <item itemvalue="Gradle.currency-convert [gradle deleteGeneratedSources]" />
       <item itemvalue="Gradle.currency-convert [processResources]" />
-      <item itemvalue="Gradle.currency-convert [processTestResources]" />
       <item itemvalue="Gradle.currency-convert [clean build]" />
       <item itemvalue="Spring Boot.CurrencyConvertApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.CurrencyConvertApplication" />
         <item itemvalue="Gradle.currency-convert [clean build]" />
-        <item itemvalue="Gradle.currency-convert [gradle deleteGeneratedSources]" />
-        <item itemvalue="Gradle.currency-convert [processTestResources]" />
+        <item itemvalue="Spring Boot.CurrencyConvertApplication" />
         <item itemvalue="Gradle.currency-convert [processResources]" />
+        <item itemvalue="Gradle.currency-convert [gradle processResources]" />
+        <item itemvalue="Gradle.currency-convert [gradle deleteGeneratedSources]" />
       </list>
     </recent_temporary>
   </component>
@@ -285,7 +292,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1731766628167</updated>
-      <workItem from="1731766629299" duration="35259000" />
+      <workItem from="1731766629299" duration="36120000" />
+      <workItem from="1731928372842" duration="664000" />
+      <workItem from="1731929413096" duration="7835000" />
     </task>
     <task id="LOCAL-00001" summary="[17-11-2024] Initial Commit">
       <option name="closed" value="true" />
@@ -295,7 +304,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731864450534</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="[17-11-2024] Initial Commit">
+      <option name="closed" value="true" />
+      <created>1731865683036</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731865683036</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

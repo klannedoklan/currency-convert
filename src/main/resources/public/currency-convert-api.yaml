@@ -1,0 +1,367 @@
+openapi: 3.0.3
+info:
+  title: Currency Convert API
+  description: API for currency conversion and exhcange rates
+  version: '1.0'
+  contact:
+    name: Ognyan Ignatov
+    email: 0g0ignatov@gmail.com
+servers:
+  - url: 'http://localhost:8080'
+    description: Local server
+paths:
+  /v1/currency-conversion:
+    get:
+      summary: Convert currency
+      description: Convert currency from one to another.
+      operationId: getConvertedCurrency
+      parameters:
+        - name: amount
+          in: query
+          description: The amount to convert.
+          required: true
+          schema:
+            type: number
+        - name: source
+          in: query
+          description: The sourve currency code.
+          required: true
+          schema:
+            $ref: '#/components/schemas/CurrencyCode'
+        - name: target
+          in: query
+          description: The target currency code.
+          required: true
+          schema:
+            $ref: '#/components/schemas/CurrencyCode'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConvertedCurrency'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      tags:
+        - Currency Convert
+      x-internal: false
+    parameters: []
+  /v1/exchange-rate:
+    get:
+      summary: Exchange Rate
+      operationId: getExchangeRate
+      description: Provides exchange rate between input and output currency
+      tags:
+        - Exchange Rate
+      parameters:
+        - name: source
+          in: query
+          description: The sourve currency code.
+          required: true
+          schema:
+            $ref: '#/components/schemas/CurrencyCode'
+        - name: target
+          in: query
+          description: The target currency code.
+          required: true
+          schema:
+            $ref: '#/components/schemas/CurrencyCode'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExchangeRate'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+  /v1/conversion-history:
+    get:
+      summary: Get  Paginated Conversion History
+      tags:
+        - Conversion History
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedConversionHistory'
+        '400':
+          description: Bad Request
+        '500':
+          description: Internal Server Error
+      operationId: getConversionHistory
+      description: Paginated endpoint for conversion history
+      parameters:
+        - name: transactionId
+          in: query
+          required: false
+          schema:
+            type: string
+            pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+          description: Filter parameter that accepts a UUID of length 36.
+        - name: createdDate
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+          description: Filter parameter that accepts an ISO local date-time format.
+        - schema:
+            type: integer
+            minimum: 0
+            default: 0
+          in: query
+          name: page
+          description: Page number
+          required: true
+        - schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+          in: query
+          name: size
+          description: Items per page
+          required: true
+components:
+  schemas:
+    ConvertedCurrency:
+      title: ConvertedCurrency
+      type: object
+      properties:
+        transactionId:
+          type: string
+          description: transaction unique identifier
+          format: uuid
+        amount:
+          type: number
+          description: amout in target currency
+          format: double
+        createdDate:
+          type: string
+          description: transaction date
+          format: date-time
+    CurrencyCode:
+      title: CurrencyCode
+      type: string
+      description: iso alpha 3 currency code of supported currencies
+      enum:
+        - AED
+        - AFN
+        - ALL
+        - AMD
+        - ANG
+        - AOA
+        - ARS
+        - AUD
+        - AWG
+        - AZN
+        - BAM
+        - BBD
+        - BDT
+        - BGN
+        - BHD
+        - BIF
+        - BMD
+        - BND
+        - BOB
+        - BRL
+        - BSD
+        - BTC
+        - BTN
+        - BWP
+        - BYR
+        - BZD
+        - CAD
+        - CDF
+        - CHF
+        - CLF
+        - CLP
+        - CNY
+        - COP
+        - CRC
+        - CUC
+        - CUP
+        - CVE
+        - CZK
+        - DJF
+        - DKK
+        - DOP
+        - DZD
+        - EGP
+        - ERN
+        - ETB
+        - EUR
+        - FJD
+        - FKP
+        - GBP
+        - GEL
+        - GGP
+        - GHS
+        - GIP
+        - GMD
+        - GNF
+        - GTQ
+        - GYD
+        - HKD
+        - HNL
+        - HRK
+        - HTG
+        - HUF
+        - IDR
+        - ILS
+        - IMP
+        - INR
+        - IQD
+        - IRR
+        - ISK
+        - JEP
+        - JMD
+        - JOD
+        - JPY
+        - KES
+        - KGS
+        - KHR
+        - KMF
+        - KPW
+        - KRW
+        - KWD
+        - KYD
+        - KZT
+        - LAK
+        - LBP
+        - LKR
+        - LRD
+        - LSL
+        - LTL
+        - LVL
+        - LYD
+        - MAD
+        - MDL
+        - MGA
+        - MKD
+        - MMK
+        - MNT
+        - MOP
+        - MRO
+        - MUR
+        - MVR
+        - MWK
+        - MXN
+        - MYR
+        - MZN
+        - NAD
+        - NGN
+        - NIO
+        - NOK
+        - NPR
+        - NZD
+        - OMR
+        - PAB
+        - PEN
+        - PGK
+        - PHP
+        - PKR
+        - PLN
+        - PYG
+        - QAR
+        - RON
+        - RSD
+        - RUB
+        - RWF
+        - SAR
+        - SBD
+        - SCR
+        - SDG
+        - SEK
+        - SGD
+        - SHP
+        - SLL
+        - SOS
+        - SRD
+        - STD
+        - SVC
+        - SYP
+        - SZL
+        - THB
+        - TJS
+        - TMT
+        - TND
+        - TOP
+        - TRY
+        - TTD
+        - TWD
+        - TZS
+        - UAH
+        - UGX
+        - USD
+        - UYU
+        - UZS
+        - VEF
+        - VND
+        - VUV
+        - WST
+        - XAF
+        - XAG
+        - XAU
+        - XCD
+        - XDR
+        - XOF
+        - XPF
+        - YER
+        - ZAR
+        - ZMK
+        - ZMW
+        - ZWL
+    ExchangeRate:
+      title: ExchangeRate
+      type: object
+      properties:
+        pairCode:
+          type: string
+          description: combined iso alpha 3 code of the source and target currency
+        rate:
+          type: number
+          description: the exchange rate between the source and target currency
+          format: double
+    Pagination:
+      title: Pagination
+      type: object
+      description: Pagination
+      properties:
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+        numberOfItems:
+          type: integer
+        hasPrevious:
+          type: boolean
+        hasNext:
+          type: boolean
+        totalItems:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+    PaginatedConversionHistory:
+      title: PaginatedConversionHistory
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConvertedCurrency'
+tags:
+  - name: Currency Convert
+  - name: Exchange Rate
+  - name: Conversion History

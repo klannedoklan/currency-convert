@@ -1,5 +1,8 @@
 # Release Notes
 
+### Version 0.0.4
+[19-11-2024] Small typo fix in README.md
+
 ### Version 0.0.3
 [19-11-2024] Added endpoints validation, error handling, and readme documentation
 

@@ -1,11 +1,13 @@
 package com.currencyconvert.data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,6 +15,8 @@ import jakarta.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import com.example.currencyconvert.model.CurrencyCode;
 
 @Getter
 @Setter
@@ -28,7 +32,17 @@ public class ConversionHistoryEntity implements Serializable {
   private UUID transactionId;
 
   @Column(nullable = false)
-  private LocalDateTime transactionDate;
+  private Double amount;
 
+  @Column(nullable = false)
+  @Enumerated(EnumType.ORDINAL)
+  private CurrencyCode sourceCurrency;
+
+  @Column(nullable = false)
+  @Enumerated(EnumType.ORDINAL)
+  private CurrencyCode targetCurrency;
+
+  @Column(nullable = false)
+  private OffsetDateTime createdDate;
 
 }

@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Currency Convert API
-  description: API for currency conversion and exhcange rates
+  description: API for currency conversion and exchange rates
   version: '1.0'
   contact:
     name: Ognyan Ignatov
@@ -10,9 +10,9 @@ servers:
   - url: 'http://localhost:8080'
     description: Local server
 paths:
-  /v1/currency-conversion:
+  /v1/convert:
     get:
-      summary: Convert currency
+      summary: Get Convert Result
       description: Convert currency from one to another.
       operationId: getConvertedCurrency
       parameters:
@@ -22,9 +22,12 @@ paths:
           required: true
           schema:
             type: number
+            format: big decimal
+            example: 12345.6789
+            default: 1
         - name: source
           in: query
-          description: The sourve currency code.
+          description: The source currency code.
           required: true
           schema:
             $ref: '#/components/schemas/CurrencyCode'
@@ -41,6 +44,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConvertedCurrency'
+              examples:
+                Example 1:
+                  value:
+                    transactionId: 75906707-8c31-479c-b354-aa805c4cefbc
+                    amount: 0.8846518
+                    createdDate: '2019-08-24T14:15:22Z'
         '400':
           description: Bad Request
         '500':
@@ -49,9 +58,9 @@ paths:
         - Currency Convert
       x-internal: false
     parameters: []
-  /v1/exchange-rate:
+  /v1/convert/rate:
     get:
-      summary: Exchange Rate
+      summary: Get Convert Rate
       operationId: getExchangeRate
       description: Provides exchange rate between input and output currency
       tags:
@@ -59,7 +68,7 @@ paths:
       parameters:
         - name: source
           in: query
-          description: The sourve currency code.
+          description: The source currency code.
           required: true
           schema:
             $ref: '#/components/schemas/CurrencyCode'
@@ -76,13 +85,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ExchangeRate'
+              examples:
+                Example 1:
+                  value:
+                    pairCode: AEDEUR
+                    rate: 5.8556
         '400':
           description: Bad Request
         '500':
           description: Internal Server Error
-  /v1/conversion-history:
+  /v1/convert/history:
     get:
-      summary: Get  Paginated Conversion History
+      summary: Get Convert History
       tags:
         - Conversion History
       responses:
@@ -92,6 +106,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedConversionHistory'
+              examples:
+                Example 1:
+                  value:
+                    pagination:
+                      pageNumber: 0
+                      pageSize: 20
+                      numberOfItems: 1
+                      hasPrevious: false
+                      hasNext: false
+                      totalItems: 1
+                      totalPages: 1
+                    items:
+                      - transactionId: 75906707-8c31-479c-b354-aa805c4cefbc
+                        amount: 0.8846518
+                        createdDate: '2019-08-24T14:15:22Z'
         '400':
           description: Bad Request
         '500':
@@ -105,18 +134,24 @@ paths:
           schema:
             type: string
             pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$'
+            minLength: 36
+            maxLength: 36
+            format: uuid
+            example: ac912577-7626-4b4a-840f-b0394bdc92f0
           description: Filter parameter that accepts a UUID of length 36.
         - name: createdDate
           in: query
-          required: false
           schema:
             type: string
             format: date-time
+            example: '2024-11-19T09:33:27.036Z'
           description: Filter parameter that accepts an ISO local date-time format.
         - schema:
             type: integer
             minimum: 0
             default: 0
+            example: 10
+            format: int32
           in: query
           name: page
           description: Page number
@@ -126,6 +161,8 @@ paths:
             minimum: 1
             maximum: 100
             default: 20
+            format: int32
+            example: 20
           in: query
           name: size
           description: Items per page
@@ -142,12 +179,19 @@ components:
           format: uuid
         amount:
           type: number
-          description: amout in target currency
+          description: amount in target currency
           format: double
+          minimum: 0
+          example: 0.8846518
         createdDate:
           type: string
           description: transaction date
           format: date-time
+      x-examples:
+        Example 1:
+          transactionId: 75906707-8c31-479c-b354-aa805c4cefbc
+          amount: 0.8846518
+          createdDate: '2019-08-24T14:15:22Z'
     CurrencyCode:
       title: CurrencyCode
       type: string
@@ -320,6 +364,8 @@ components:
         - ZMK
         - ZMW
         - ZWL
+      x-examples:
+        Example 1: AED
     ExchangeRate:
       title: ExchangeRate
       type: object
@@ -331,6 +377,10 @@ components:
           type: number
           description: the exchange rate between the source and target currency
           format: double
+      x-examples:
+        Example 1:
+          pairCode: AEDEUR
+          rate: -1.7976931348623157e+308
     Pagination:
       title: Pagination
       type: object
@@ -351,6 +401,15 @@ components:
           format: int64
         totalPages:
           type: integer
+      x-examples:
+        Example 1:
+          pageNumber: 0
+          pageSize: 20
+          numberOfItems: 1
+          hasPrevious: false
+          hasNext: false
+          totalItems: 3
+          totalPages: 1
     PaginatedConversionHistory:
       title: PaginatedConversionHistory
       type: object
@@ -361,6 +420,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ConvertedCurrency'
+      x-examples:
+        Example 1:
+          pagination:
+            pageNumber: 0
+            pageSize: 20
+            numberOfItems: 1
+            hasPrevious: false
+            hasNext: false
+            totalItems: 1
+            totalPages: 1
+          items:
+            - transactionId: 75906707-8c31-479c-b354-aa805c4cefbc
+              amount: 0.8846518
+              createdDate: '2019-08-24T14:15:22Z'
 tags:
   - name: Currency Convert
   - name: Exchange Rate

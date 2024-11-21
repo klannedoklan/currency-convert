@@ -2,7 +2,7 @@
 ## Prerequisites
 - Docker
 - Internet connection
-- External domain: https://currencylayer.com/ (for currency exchange rates) is up and running
+- Access Key from: https://currencylayer.com/ - register and get the free access key
 
 ## Installation
 1. Clone the repository

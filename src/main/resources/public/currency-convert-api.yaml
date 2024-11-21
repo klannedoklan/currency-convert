@@ -25,18 +25,24 @@ paths:
             format: big decimal
             example: 12345.6789
             default: 1
-        - name: source
+        - name: from
           in: query
           description: The source currency code.
           required: true
           schema:
             $ref: '#/components/schemas/CurrencyCode'
-        - name: target
+        - name: to
           in: query
           description: The target currency code.
           required: true
           schema:
             $ref: '#/components/schemas/CurrencyCode'
+        - schema:
+            type: string
+          in: query
+          name: accessKey
+          description: External API Access key
+          required: true
       responses:
         '200':
           description: OK
@@ -66,18 +72,24 @@ paths:
       tags:
         - Exchange Rate
       parameters:
-        - name: source
+        - name: from
           in: query
           description: The source currency code.
           required: true
           schema:
             $ref: '#/components/schemas/CurrencyCode'
-        - name: target
+        - name: to
           in: query
           description: The target currency code.
           required: true
           schema:
             $ref: '#/components/schemas/CurrencyCode'
+        - schema:
+            type: string
+          in: query
+          name: accessKey
+          required: true
+          description: External API Access key
       responses:
         '200':
           description: OK
@@ -172,7 +184,16 @@ components:
     ConvertedCurrency:
       title: ConvertedCurrency
       type: object
+      x-examples:
+        Example 1:
+          transactionId: 75906707-8c31-479c-b354-aa805c4cefbc
+          amount: 0.8846518
+          createdDate: '2019-08-24T14:15:22Z'
       properties:
+        source:
+          $ref: '#/components/schemas/CurrencyCode'
+        target:
+          $ref: '#/components/schemas/CurrencyCode'
         transactionId:
           type: string
           description: transaction unique identifier
@@ -183,15 +204,17 @@ components:
           format: double
           minimum: 0
           example: 0.8846518
-        createdDate:
+        timestamp:
           type: string
           description: transaction date
           format: date-time
-      x-examples:
-        Example 1:
-          transactionId: 75906707-8c31-479c-b354-aa805c4cefbc
-          amount: 0.8846518
-          createdDate: '2019-08-24T14:15:22Z'
+          x-stoplight:
+            id: hxeq3n5j1ge9u
+        result:
+          type: number
+          x-stoplight:
+            id: 2a5z2ga4ugp3h
+          format: double
     CurrencyCode:
       title: CurrencyCode
       type: string
@@ -369,18 +392,46 @@ components:
     ExchangeRate:
       title: ExchangeRate
       type: object
-      properties:
-        pairCode:
-          type: string
-          description: combined iso alpha 3 code of the source and target currency
-        rate:
-          type: number
-          description: the exchange rate between the source and target currency
-          format: double
       x-examples:
         Example 1:
           pairCode: AEDEUR
           rate: -1.7976931348623157e+308
+      properties:
+        source:
+          $ref: '#/components/schemas/CurrencyCode'
+        target:
+          $ref: '#/components/schemas/CurrencyCode'
+        startDate:
+          type: string
+          x-stoplight:
+            id: k838naed863x1
+          format: date
+        endDate:
+          type: string
+          x-stoplight:
+            id: 1fapv6woenklw
+          format: date
+        startRate:
+          type: number
+          description: the exchange rate between the source and target currency
+          format: double
+          x-stoplight:
+            id: ubpzpjnssqizi
+        end_rate:
+          type: number
+          x-stoplight:
+            id: 2ebgaidpj5xcb
+          format: double
+        change:
+          type: number
+          x-stoplight:
+            id: 3o6gosbubnzeq
+          format: double
+        changePct:
+          type: number
+          x-stoplight:
+            id: x1bwypdcrdil9
+          format: double
     Pagination:
       title: Pagination
       type: object

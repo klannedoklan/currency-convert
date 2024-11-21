@@ -1,8 +1,8 @@
-package com.currencyconvert.domain.dto;
+package com.currencyconvert.domain.dto.request;
 
 import com.example.currencyconvert.model.CurrencyCode;
 
-public record ConvertRateDto(
+public record ConvertRateRequestDto(
     CurrencyCode source,
     CurrencyCode target) {
 }

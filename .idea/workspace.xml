@@ -5,23 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28a346bc-bc82-4751-9ec5-5d490944de06" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/ConvertDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/ConvertHistoryDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/ConvertRateDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/Filter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/errorhandling/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/validator/ConversionHistoryFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/validator/ConversionHistoryFilterValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/validator/PositiveBigDecimal.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/validator/PositiveBigDecimalValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/HELP.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/client/CurrencyLayerFeignClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/client/response/ConvertResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/response/ConvertResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/mapper/CurrencyConvertMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.MD" beforeDir="false" afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/CurrencyConvertApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/CurrencyConvertApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/data/ConversionHistoryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/data/ConversionHistoryEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/ConvertDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/request/ConvertRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/ConvertHistoryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/request/ConvertHistoryRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/ConvertRateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/request/ConvertRateRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/errorhandling/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/errorhandling/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/service/ConversionHistoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/service/ConversionHistoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/service/impl/ConversionHistoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/service/impl/ConversionHistoryServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/public/currency-convert-api.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/public/currency-convert-api.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,9 +48,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Record" />
         <option value="Interface" />
         <option value="Class" />
-        <option value="Record" />
       </list>
     </option>
   </component>
@@ -99,6 +98,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.currencyconvert.domain.dto.response" />
+    </key>
+  </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="gradle clean build" />
@@ -163,8 +167,25 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1732024731901</updated>
-      <workItem from="1732024732935" duration="6086000" />
+      <workItem from="1732024732935" duration="19696000" />
     </task>
+    <task id="LOCAL-00001" summary="[19-11-2024] Added endpoints validation, error handling, and readme documentation">
+      <option name="closed" value="true" />
+      <created>1732039043522</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1732039043522</updated>
+    </task>
+    <task id="LOCAL-00002" summary="[19-11-2024] Small typo fix in README.md">
+      <option name="closed" value="true" />
+      <created>1732039253062</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732039253062</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,18 +202,33 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[19-11-2024] Added endpoints validation, error handling, and readme documentation" />
+    <MESSAGE value="[19-11-2024] Small typo fix in README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="[19-11-2024] Small typo fix in README.md" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java</url>
-          <line>38</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/errorhandling/GlobalExceptionHandler.java</url>
+          <line>95</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/errorhandling/GlobalExceptionHandler.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java</url>
           <line>68</line>
-          <option name="timeStamp" value="8" />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

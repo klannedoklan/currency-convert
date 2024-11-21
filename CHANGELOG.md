@@ -1,5 +1,8 @@
 # Release Notes
 
+### Version 0.0.5
+[21-11-2024] implemented convert endpoint with external API integration.
+
 ### Version 0.0.4
 [19-11-2024] Small typo fix in README.md
 

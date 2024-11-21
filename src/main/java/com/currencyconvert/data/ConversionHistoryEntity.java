@@ -1,6 +1,7 @@
 package com.currencyconvert.data;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -35,14 +36,17 @@ public class ConversionHistoryEntity implements Serializable {
   private Double amount;
 
   @Column(nullable = false)
-  @Enumerated(EnumType.ORDINAL)
-  private CurrencyCode sourceCurrency;
+  private Double result;
 
   @Column(nullable = false)
   @Enumerated(EnumType.ORDINAL)
-  private CurrencyCode targetCurrency;
+  private CurrencyCode from;
 
   @Column(nullable = false)
-  private OffsetDateTime createdDate;
+  @Enumerated(EnumType.ORDINAL)
+  private CurrencyCode to;
+
+  @Column(nullable = false)
+  private OffsetDateTime timestamp;
 
 }

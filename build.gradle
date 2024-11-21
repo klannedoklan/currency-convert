@@ -8,6 +8,7 @@ plugins {
 ext {
 	springCloudVersion = "2023.0.3"
 	springDocVersion = "2.6.0"
+	vavrVersion = "0.10.5"
 }
 
 group = 'com.example'
@@ -26,6 +27,7 @@ dependencies {
 	implementation 'io.swagger.core.v3:swagger-annotations:2.2.10'
 	implementation 'io.swagger.core.v3:swagger-models:2.2.10'
 	implementation 'org.openapitools:jackson-databind-nullable:0.2.4'
+	implementation "io.vavr:vavr:$vavrVersion"
 
 	// Springdoc
 	implementation "org.springdoc:springdoc-openapi-starter-webmvc-api:$springDocVersion"

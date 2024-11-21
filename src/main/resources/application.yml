@@ -33,3 +33,7 @@ springdoc:
       - url: currency-convert-api.yaml
         name: currency-convert-api
     urls-primary-name: currency-convert-api
+
+
+currencyLayer:
+  url: https://api.currencylayer.com

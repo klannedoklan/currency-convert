@@ -6,6 +6,7 @@ import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import jakarta.validation.ConstraintViolation;
@@ -15,6 +16,8 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import javax.naming.ServiceUnavailableException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -61,6 +64,30 @@ public class GlobalExceptionHandler {
     errors.put("parameter", ex.getParameterName());
 
     return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(ServiceUnavailableException.class)
+  @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+  public ResponseEntity<Map<String, Object>> handleServiceUnavailableException(ServiceUnavailableException ex) {
+    Map<String, Object> errors = new HashMap<>();
+    errors.put("timestamp", LocalDateTime.now());
+    errors.put("status", HttpStatus.SERVICE_UNAVAILABLE.value());
+    errors.put("error", "Service Unavailable");
+    errors.put("message", ex.getMessage());
+
+    return new ResponseEntity<>(errors, HttpStatus.SERVICE_UNAVAILABLE);
+  }
+
+  @ExceptionHandler(HttpServerErrorException.class)
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+  public ResponseEntity<Map<String, Object>> handleHttpServerErrorException(HttpServerErrorException ex) {
+    Map<String, Object> errors = new HashMap<>();
+    errors.put("timestamp", LocalDateTime.now());
+    errors.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
+    errors.put("error", "Internal Server Error");
+    errors.put("message", ex.getMessage());
+
+    return new ResponseEntity<>(errors, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
 //  @ExceptionHandler(Exception.class)

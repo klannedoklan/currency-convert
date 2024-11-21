@@ -1,8 +1,6 @@
 package com.currencyconvert.data;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -47,6 +45,6 @@ public class ConversionHistoryEntity implements Serializable {
   private CurrencyCode to;
 
   @Column(nullable = false)
-  private OffsetDateTime timestamp;
+  private long timestamp;
 
 }

@@ -5,18 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28a346bc-bc82-4751-9ec5-5d490944de06" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/client/CurrencyLayerFeignClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/client/response/ConvertResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/response/ConvertResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/mapper/CurrencyConvertMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.MD" beforeDir="false" afterPath="$PROJECT_DIR$/README.MD" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/client/exception/RateLimitExceededException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/client/interceptor/RateLimitingInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/client/limiter/RateLimiter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/client/response/ChangeResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/configuration/FeignClientConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/configuration/RateLimitProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/data/specification/ConversionHistorySpecification.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/mapper/PaginationMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/util/DateTime.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/validator/RealDate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/validator/RealDateValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/currencyconvert/fixture/DateTimeFixture.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/currencyconvert/util/DateTimeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/CurrencyConvertApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/CurrencyConvertApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/client/CurrencyLayerFeignClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/client/CurrencyLayerFeignClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/data/ConversionHistoryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/data/ConversionHistoryEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/ConvertDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/request/ConvertRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/ConvertHistoryDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/request/ConvertHistoryRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/ConvertRateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/request/ConvertRateRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/request/ConvertHistoryRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/request/ConvertHistoryRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/response/ConvertResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/domain/dto/response/ConvertResponseDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/errorhandling/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/errorhandling/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/mapper/CurrencyConvertMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/mapper/CurrencyConvertMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/repository/JpaConversionHistoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/data/repository/JpaConversionHistoryRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/service/ConversionHistoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/service/ConversionHistoryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/service/impl/ConversionHistoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/service/impl/ConversionHistoryServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java" afterDir="false" />
@@ -36,9 +49,28 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="currency-convert" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="currency-convert" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="currency-convert" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="verification" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -73,7 +105,9 @@
   "keyToString": {
     "Downloaded.Files.Path.Enabled": "false",
     "Gradle.Build currency-convert.executor": "Run",
+    "Gradle.DateTimeTest.executor": "Run",
     "Gradle.currency-convert [clean build].executor": "Run",
+    "Gradle.currency-convert [test].executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
@@ -83,7 +117,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.CurrencyConvertApplication.executor": "Run",
+    "Spring Boot.CurrencyConvertApplication.executor": "Debug",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -100,6 +134,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.currencyconvert.fixture" />
+      <recent name="com.currencyconvert.util" />
+      <recent name="com.currencyconvert.web.rest.validator" />
       <recent name="com.currencyconvert.domain.dto.response" />
     </key>
   </component>
@@ -108,7 +145,31 @@
       <command value="gradle clean build" />
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.CurrencyConvertApplication">
+  <component name="RunManager" selected="Gradle.currency-convert [clean build]">
+    <configuration name="DateTimeTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.currencyconvert.util.DateTimeTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
     <configuration name="currency-convert [clean build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -122,6 +183,28 @@
           <list>
             <option value="clean" />
             <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="currency-convert [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -147,8 +230,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.CurrencyConvertApplication" />
         <item itemvalue="Gradle.currency-convert [clean build]" />
+        <item itemvalue="Gradle.DateTimeTest" />
+        <item itemvalue="Gradle.currency-convert [test]" />
+        <item itemvalue="Spring Boot.CurrencyConvertApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -167,7 +252,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1732024731901</updated>
-      <workItem from="1732024732935" duration="19696000" />
+      <workItem from="1732024732935" duration="42489000" />
     </task>
     <task id="LOCAL-00001" summary="[19-11-2024] Added endpoints validation, error handling, and readme documentation">
       <option name="closed" value="true" />
@@ -185,7 +270,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732039253062</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="[21-11-2024] implemented convert endpoint with external API integration.">
+      <option name="closed" value="true" />
+      <created>1732191734880</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732191734880</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,30 +298,82 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="[19-11-2024] Added endpoints validation, error handling, and readme documentation" />
     <MESSAGE value="[19-11-2024] Small typo fix in README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="[19-11-2024] Small typo fix in README.md" />
+    <MESSAGE value="[21-11-2024] Small typo fix in README.md" />
+    <MESSAGE value="[21-11-2024] implemented convert endpoint with external API integration." />
+    <option name="LAST_COMMIT_MESSAGE" value="[21-11-2024] implemented convert endpoint with external API integration." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java</url>
+          <line>114</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/errorhandling/GlobalExceptionHandler.java</url>
-          <line>95</line>
-          <option name="timeStamp" value="8" />
+          <line>100</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/errorhandling/GlobalExceptionHandler.java</url>
+          <line>103</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/errorhandling/GlobalExceptionHandler.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/errorhandling/GlobalExceptionHandler.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java</url>
-          <line>68</line>
-          <option name="timeStamp" value="9" />
+          <line>61</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/service/impl/ConversionHistoryServiceImpl.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/service/impl/ConversionHistoryServiceImpl.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java</url>
-          <line>80</line>
-          <option name="timeStamp" value="10" />
+          <line>92</line>
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="11" />
+          <line>122</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/web/rest/controller/CurrencyConvertController.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/data/specification/ConversionHistorySpecification.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/data/specification/ConversionHistorySpecification.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/currencyconvert/data/specification/ConversionHistorySpecification.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

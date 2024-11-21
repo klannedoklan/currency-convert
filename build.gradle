@@ -28,6 +28,7 @@ dependencies {
 	implementation 'io.swagger.core.v3:swagger-models:2.2.10'
 	implementation 'org.openapitools:jackson-databind-nullable:0.2.4'
 	implementation "io.vavr:vavr:$vavrVersion"
+	implementation 'com.github.vladimir-bukhtoyarov:bucket4j-core:7.3.0'
 
 	// Springdoc
 	implementation "org.springdoc:springdoc-openapi-starter-webmvc-api:$springDocVersion"
@@ -84,6 +85,14 @@ compileJava {
 	dependsOn tasks.openApiGenerate
 	source tasks.openApiGenerate.outputs
 }
+
+tasks.withType(Test).tap {
+	configureEach {
+		useJUnitPlatform()
+	}
+}
+
+tasks.build.dependsOn(tasks.test)
 
 processResources {
 	from 'publicFolder'

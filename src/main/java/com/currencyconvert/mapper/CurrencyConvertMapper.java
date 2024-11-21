@@ -1,15 +1,21 @@
 package com.currencyconvert.mapper;
 
-import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
+import java.util.List;
+import java.util.NoSuchElementException;
 
+import org.springframework.data.domain.Page;
+
+import com.currencyconvert.client.response.ChangeResponse;
 import com.currencyconvert.client.response.ConvertResponse;
 import com.currencyconvert.data.ConversionHistoryEntity;
-import com.currencyconvert.domain.dto.request.ConvertRequestDto;
+import com.currencyconvert.domain.dto.request.ConvertRateRequestDto;
 import com.currencyconvert.domain.dto.response.ConvertResponseDto;
+import com.currencyconvert.util.DateTime;
 import com.example.currencyconvert.model.ConvertedCurrency;
 import com.example.currencyconvert.model.CurrencyCode;
+import com.example.currencyconvert.model.ExchangeRate;
+import com.example.currencyconvert.model.PaginatedConversionHistory;
+import com.example.currencyconvert.model.Pagination;
 
 public final class CurrencyConvertMapper {
 
@@ -23,7 +29,8 @@ public final class CurrencyConvertMapper {
     convertedCurrency.setTarget(conversionHistoryEntity.getTo());
     convertedCurrency.setAmount(conversionHistoryEntity.getAmount());
     convertedCurrency.setResult(conversionHistoryEntity.getResult());
-    convertedCurrency.setTimestamp(conversionHistoryEntity.getTimestamp());
+    long timestamp = conversionHistoryEntity.getTimestamp();
+    convertedCurrency.setTimestamp(DateTime.toOffsetDateTime(timestamp * 1000));
 
     return convertedCurrency;
   }
@@ -31,15 +38,53 @@ public final class CurrencyConvertMapper {
   public static ConvertResponseDto toConvertResponseDto(ConvertResponse clientResponse) {
     CurrencyCode from = CurrencyCode.fromValue(clientResponse.getQuery().getFrom());
     CurrencyCode to = CurrencyCode.fromValue(clientResponse.getQuery().getTo());
-    Instant timestamp = Instant.ofEpochMilli(clientResponse.getInfo().getTimestamp());
-    OffsetDateTime offsetDateTime = OffsetDateTime.ofInstant(timestamp, ZoneOffset.UTC);
     return new ConvertResponseDto(
         from,
         to,
         clientResponse.getQuery().getAmount(),
         clientResponse.getResult(),
-        offsetDateTime
+        clientResponse.getInfo().getTimestamp()
     );
+  }
+
+  public static ExchangeRate toExchangeRate(ConvertRateRequestDto request, ChangeResponse changeResponse) {
+    CurrencyCode source = request.source();
+    CurrencyCode target = request.target();
+    String targetSourceQuoteKey = String.format("%s%s", target, source);
+
+    ExchangeRate exchangeRate = new ExchangeRate();
+    exchangeRate.setSource(source);
+    exchangeRate.setTarget(target);
+    exchangeRate.setStartDate(changeResponse.getStartDate());
+    exchangeRate.setEndDate(changeResponse.getEndDate());
+
+    if (!changeResponse.getQuotes().containsKey(targetSourceQuoteKey)) {
+      throw new NoSuchElementException("Quote for " + targetSourceQuoteKey + " not found in the response.");
+    }
+
+    ChangeResponse.Quote quote = changeResponse.getQuotes().get(targetSourceQuoteKey);
+    exchangeRate.setStartRate(quote.getStartRate());
+    exchangeRate.setEndRate(quote.getEndRate());
+    exchangeRate.setChange(quote.getChange());
+    exchangeRate.setChangePct(quote.getChangePct());
+
+    return exchangeRate;
+  }
+
+  public static PaginatedConversionHistory toPaginatedConversionHistory(Page<ConversionHistoryEntity> historyPage) {
+    Pagination pagination = PaginationMapper.toPagination(historyPage);
+    PaginatedConversionHistory paginatedConversionHistory = new PaginatedConversionHistory();
+    paginatedConversionHistory.setPagination(pagination);
+    List<ConvertedCurrency> items = toConvertedCurrencies(historyPage.getContent());
+    paginatedConversionHistory.setItems(items);
+
+    return paginatedConversionHistory;
+  }
+
+  public static List<ConvertedCurrency> toConvertedCurrencies(List<ConversionHistoryEntity> historyEntities) {
+    return historyEntities.stream()
+        .map(CurrencyConvertMapper::toConvertedCurrencyResponse)
+        .toList();
   }
 
 }

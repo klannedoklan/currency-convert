@@ -1,19 +1,20 @@
 package com.currencyconvert.service.impl;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.currencyconvert.client.response.ConvertResponse;
 import com.currencyconvert.data.ConversionHistoryEntity;
+import com.currencyconvert.data.specification.ConversionHistorySpecification;
+import com.currencyconvert.domain.dto.request.ConvertHistoryRequestDto;
 import com.currencyconvert.domain.dto.response.ConvertResponseDto;
 import com.currencyconvert.service.ConversionHistoryService;
-import com.currencyconvert.repository.JpaConversionHistoryRepository;
+import com.currencyconvert.data.repository.JpaConversionHistoryRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -37,8 +38,10 @@ public class ConversionHistoryServiceImpl implements ConversionHistoryService {
   }
 
   @Override
-  public Page<ConversionHistoryEntity> getHistory(UUID transactionId, LocalDateTime dateTime, Pageable pageable) {
-    return null;
+  public Page<ConversionHistoryEntity> getHistory(ConvertHistoryRequestDto requestDto) {
+    Pageable pageable = Pageable.ofSize(requestDto.size()).withPage(requestDto.page());
+    Specification<ConversionHistoryEntity> specification = new ConversionHistorySpecification(requestDto);
+    return jpaConversionHistoryRepository.findAll(specification, pageable);
   }
 
 }

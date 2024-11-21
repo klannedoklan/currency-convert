@@ -1,7 +1,6 @@
 package com.currencyconvert.web.rest.controller;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 import java.util.Set;
 import java.util.UUID;
 
@@ -9,26 +8,28 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
 
-import javax.naming.ServiceUnavailableException;
-
 import lombok.RequiredArgsConstructor;
 
 import feign.FeignException;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 
 import com.currencyconvert.client.CurrencyLayerFeignClient;
+import com.currencyconvert.client.exception.RateLimitExceededException;
+import com.currencyconvert.client.response.ChangeResponse;
 import com.currencyconvert.client.response.ConvertResponse;
 import com.currencyconvert.data.ConversionHistoryEntity;
 import com.currencyconvert.domain.dto.request.ConvertHistoryRequestDto;
-import com.currencyconvert.domain.dto.request.ConvertRequestDto;
 import com.currencyconvert.domain.dto.request.ConvertRateRequestDto;
+import com.currencyconvert.domain.dto.request.ConvertRequestDto;
 import com.currencyconvert.domain.dto.response.ConvertResponseDto;
 import com.currencyconvert.mapper.CurrencyConvertMapper;
 import com.currencyconvert.service.ConversionHistoryService;
@@ -51,12 +52,15 @@ public class CurrencyConvertController implements V1Api {
       Integer page,
       Integer size,
       UUID transactionId,
-      OffsetDateTime createdDate
+      String createdDate
   ) {
     var request = new ConvertHistoryRequestDto(page, size, transactionId, createdDate);
     validateRequest(request);
 
-    return V1Api.super.getConversionHistory(page, size, transactionId, createdDate);
+    Page<ConversionHistoryEntity> historyPage = conversionHistoryService.getHistory(request);
+    PaginatedConversionHistory apiResponse = CurrencyConvertMapper.toPaginatedConversionHistory(historyPage);
+
+    return ResponseEntity.ok(apiResponse);
   }
 
   @Override
@@ -69,21 +73,22 @@ public class CurrencyConvertController implements V1Api {
     var requestDto = new ConvertRequestDto(from, to, amount, accessKey);
     validateRequest(requestDto);
 
-    Either<Throwable, ConvertResponse> clientResult = Try.of(() -> currencyLayerFeignClient.convert(
-            requestDto.source().getValue(),
-            requestDto.target().getValue(),
-            requestDto.amount().doubleValue(),
-            requestDto.accessKey()
-        ))
-        .toEither()
-        .mapLeft(this::handleClientError);
+    Either<Throwable, ConvertResponse> clientResult = Try.of(() ->
+            currencyLayerFeignClient.convert(
+                requestDto.source().getValue(),
+                requestDto.target().getValue(),
+                requestDto.amount().doubleValue(),
+                requestDto.accessKey()
+            )
+        )
+        .toEither();
 
-    ConvertResponse clientResponse = clientResult.get();
+    if (clientResult.isLeft()) {
+      throwException(clientResult.getLeft());
+    }
 
-    ConvertResponseDto convertResponseDto = CurrencyConvertMapper.toConvertResponseDto(clientResponse);
-
+    ConvertResponseDto convertResponseDto = CurrencyConvertMapper.toConvertResponseDto(clientResult.get());
     ConversionHistoryEntity conversionHistoryEntity = conversionHistoryService.persistHistory(convertResponseDto);
-
     ConvertedCurrency apiResponse = CurrencyConvertMapper.toConvertedCurrencyResponse(conversionHistoryEntity);
 
     return ResponseEntity.ok(apiResponse);
@@ -94,7 +99,20 @@ public class CurrencyConvertController implements V1Api {
     var request = new ConvertRateRequestDto(from, to);
     validateRequest(request);
 
-    return V1Api.super.getExchangeRate(from, to, accessKey);
+    Either<Throwable, ChangeResponse> clientResponse = Try.of(() ->
+            currencyLayerFeignClient.getChange(
+                String.format("%s,%s", request.source().getValue(), request.target().getValue()),
+                accessKey)
+        )
+        .toEither();
+
+    if (clientResponse.isLeft()) {
+      throwException(clientResponse.getLeft());
+    }
+
+    ExchangeRate apiResponse = CurrencyConvertMapper.toExchangeRate(request, clientResponse.get());
+
+    return ResponseEntity.ok(apiResponse);
   }
 
   private <T> void validateRequest(T request) {
@@ -104,10 +122,12 @@ public class CurrencyConvertController implements V1Api {
     }
   }
 
-  private Throwable handleClientError(Throwable throwable) {
+  private <T> T throwException(Throwable throwable) {
     if (throwable instanceof FeignException.ServiceUnavailable) {
-      return new ServiceUnavailableException();
+      throw new HttpServerErrorException(HttpStatus.SERVICE_UNAVAILABLE, "Conversion API unavailable.");
+    } else if (throwable instanceof RateLimitExceededException) {
+      throw new HttpClientErrorException(HttpStatus.TOO_MANY_REQUESTS, "Reached maximum amount of daily requests.");
     }
-    return new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR);
+    throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error.");
   }
 }

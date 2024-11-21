@@ -37,3 +37,9 @@ springdoc:
 
 currencyLayer:
   url: https://api.currencylayer.com
+
+rate:
+  limit:
+    capacity: 100
+    days: 1
+

@@ -155,8 +155,7 @@ paths:
           in: query
           schema:
             type: string
-            format: date-time
-            example: '2024-11-19T09:33:27.036Z'
+            example: '2024-11-19'
           description: Filter parameter that accepts an ISO local date-time format.
         - schema:
             type: integer
@@ -417,7 +416,7 @@ components:
           format: double
           x-stoplight:
             id: ubpzpjnssqizi
-        end_rate:
+        endRate:
           type: number
           x-stoplight:
             id: 2ebgaidpj5xcb

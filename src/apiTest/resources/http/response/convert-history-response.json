@@ -1,0 +1,21 @@
+{
+  "pagination": {
+    "pageNumber": 0,
+    "pageSize": 1,
+    "numberOfItems": 1,
+    "hasPrevious": false,
+    "hasNext": false,
+    "totalItems": 1,
+    "totalPages": 1
+  },
+  "items": [
+    {
+      "source": "AED",
+      "target": "USD",
+      "transactionId": "4ce492ef-46e9-4688-9252-b63c0aacbb4f",
+      "amount": 350.0,
+      "timestamp": "2024-11-21T20:53:16Z",
+      "result": 366.85705
+    }
+  ]
+}

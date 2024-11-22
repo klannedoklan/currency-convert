@@ -1,5 +1,8 @@
 # Release Notes
 
+### Version 0.0.7
+* [22-11-2024] Added specification and Api contract test.
+
 ### Version 0.0.6
 * [21-11-2024] implemented rate and history endpoints. Added tests for DateTime util for demo purposes.
 

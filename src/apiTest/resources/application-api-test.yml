@@ -6,7 +6,7 @@ spring:
       settings.trace: false
       settings.web-allow-others: false
   datasource:
-    url: jdbc:h2:mem:convertDb;DB_CLOSE_DELAY=-1;
+    url: jdbc:h2:mem:apiTestDb;DB_CLOSE_DELAY=-1;
     username: sa
     password:
     driverClassName: org.h2.Driver
@@ -24,32 +24,14 @@ spring:
     hibernate:
       ddl-auto: update
 
-springdoc:
-  paths-to-match: /admin/manage/*
-  show-actuator: false
-  swagger-ui:
-    path: /swagger-ui/index.html
-    urls:
-      - url: currency-convert-api.yaml
-        name: currency-convert-api
-    urls-primary-name: currency-convert-api
-
-
-currencyLayer:
-  url: https://api.currencylayer.com
-
-rate:
-  limit:
-    capacity: 100
-    days: 1
-
 logging:
-    level:
-        org:
-        springframework:
-            cache: DEBUG
-        com:
-        currency:
-            convert: DEBUG
+  level:
+    org:
+    springframework:
+      cache: DEBUG
+    com:
+    currency:
+      convert: DEBUG
+
 cache:
   ttl-seconds: 5

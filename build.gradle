@@ -29,6 +29,8 @@ dependencies {
 	implementation 'org.openapitools:jackson-databind-nullable:0.2.4'
 	implementation "io.vavr:vavr:$vavrVersion"
 	implementation 'com.github.vladimir-bukhtoyarov:bucket4j-core:7.3.0'
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	implementation 'com.github.ben-manes.caffeine:caffeine:3.1.6'
 
 	// Springdoc
 	implementation "org.springdoc:springdoc-openapi-starter-webmvc-api:$springDocVersion"
@@ -40,6 +42,9 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation "org.junit.platform:junit-platform-suite"
+	testImplementation 'com.github.java-json-tools:json-schema-validator:2.2.14'
+	testImplementation "io.rest-assured:spring-mock-mvc"
+	testImplementation "io.rest-assured:json-schema-validator"
 
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
@@ -71,11 +76,32 @@ java {
 			java.srcDirs += "src/generated/java"
 			resources.srcDirs += "src/generated/resources"
 		}
+		apiTest {
+			java.srcDirs = ['src/apiTest/java']
+			resources.srcDirs = ['src/apiTest/resources']
+			compileClasspath += sourceSets.main.output + sourceSets.test.output
+			runtimeClasspath += sourceSets.main.output + sourceSets.test.output
+		}
 	}
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(application_java_version)
 	}
 }
+
+configurations {
+	apiTestImplementation.extendsFrom testImplementation
+	apiTestRuntimeOnly.extendsFrom testRuntimeOnly
+}
+
+task apiTest(type: Test) {
+	description = 'Runs the API tests.'
+	group = 'verification'
+	testClassesDirs = sourceSets.apiTest.output.classesDirs
+	classpath = sourceSets.apiTest.runtimeClasspath
+	shouldRunAfter test
+}
+
+check.dependsOn apiTest
 
 bootJar {
 	archiveFileName = 'currency-convert.jar'
